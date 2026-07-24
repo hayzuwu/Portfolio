@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hayzuwu — Frontend Specialist</title>
   
+  <!-- Favicon Logo -->
+  <link rel="icon" type="image/png" href="logo.png">
+
   <!-- Premium Typography: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,6 +80,21 @@
       width: 100%;
       top: 0;
       z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
     }
 
     .logo {
@@ -275,6 +293,122 @@
       50% { opacity: 0.2; }
     }
 
+    /* Redesigned Premium Bento QR Visual */
+    .mock-qr-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 260px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      user-select: none;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .project-visual:hover .mock-qr-card {
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .qr-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .qr-card-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .qr-dot-indicator {
+      width: 6px;
+      height: 6px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulseCaret 2s infinite;
+    }
+
+    .qr-card-body {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .qr-matrix-preview {
+      width: 72px;
+      height: 72px;
+      background: #ffffff;
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      padding: 6px;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .qr-m-cell {
+      background: #050505;
+      border-radius: 2px;
+    }
+
+    .qr-m-cell.on {
+      background: #ffffff;
+    }
+
+    .qr-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    .qr-badge-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(255,255,255,0.1);
+      padding: 3px 8px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .qr-url-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .qr-card-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .qr-scan-action {
+      color: #f5f5f5;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     /* Project Action Overlay Button */
     .project-link-badge {
       position: absolute;
@@ -460,7 +594,10 @@
 
   <!-- Navigation -->
   <nav class="container animate-up delay-1">
-    <a href="#" class="logo">hayzuwu.</a>
+    <a href="#" class="logo-container">
+      <img src="logo.png" alt="HZ Logo" class="nav-logo-img">
+      <span class="logo">hayzuwu.</span>
+    </a>
     <div class="nav-links">
       <a href="#work">Work</a>
       <a href="#contact">Contact</a>
@@ -489,20 +626,8 @@
       </div>
 
       <div class="project-grid">
-        
-        <!-- Project 1 -->
-        <div class="project-item animate-up delay-2">
-          <div class="project-visual">
-            <span class="visual-placeholder-text">Music Player UI</span>
-          </div>
-          <div class="project-info">
-            <h3 class="project-title">Custom Music Player</h3>
-            <p class="project-desc">A custom-built vanilla Spotify clone bridging aesthetics and performance. Features fluid playlist navigation and a minimalist frosted-glass UI.</p>
-            <p class="project-tech">HTML5 / CSS / JavaScript / Web Audio API</p>
-          </div>
-        </div>
 
-        <!-- Project 2: Madtype (Larger & Better Preview Box) -->
+        <!-- Project 1: Madtype -->
         <div class="project-item animate-up delay-2">
           <a href="https://hayzuwu.github.io/MadType/" class="project-visual" target="_blank" title="Launch Madtype">
             <div class="mock-typing-box">
@@ -525,6 +650,45 @@
             <h3 class="project-title">Madtype</h3>
             <p class="project-desc">A minimalist typing speed test and typography playground. Engineered for ultra-low latency input rendering and a distraction-free, fluid user experience[cite: 1].</p>
             <p class="project-tech">JavaScript (ES6+) / HTML5 / Modern CSS[cite: 1]</p>
+          </div>
+        </div>
+
+        <!-- Project 2: QR Generator -->
+        <div class="project-item animate-up delay-2">
+          <a href="https://hayzuwu.github.io/Qr-Generator/" class="project-visual" target="_blank" title="Launch QR Generator">
+            <div class="mock-qr-card">
+              <div class="qr-card-top">
+                <span class="qr-card-title">QR Engine v1.0</span>
+                <div class="qr-dot-indicator"></div>
+              </div>
+              <div class="qr-card-body">
+                <div class="qr-matrix-preview">
+                  <div class="qr-m-cell on"></div>
+                  <div class="qr-m-cell"></div>
+                  <div class="qr-m-cell on"></div>
+                  <div class="qr-m-cell"></div>
+                  <div class="qr-m-cell on"></div>
+                  <div class="qr-m-cell"></div>
+                  <div class="qr-m-cell on"></div>
+                  <div class="qr-m-cell on"></div>
+                  <div class="qr-m-cell on"></div>
+                </div>
+                <div class="qr-card-info">
+                  <span class="qr-badge-tag">Dynamic</span>
+                  <span class="qr-url-text">hayzuwu.io</span>
+                </div>
+              </div>
+              <div class="qr-card-footer">
+                <span>Instant Encode</span>
+                <span class="qr-scan-action">Ready ↗</span>
+              </div>
+            </div>
+            <span class="project-link-badge">Live Preview ↗</span>
+          </a>
+          <div class="project-info">
+            <h3 class="project-title">QR Generator</h3>
+            <p class="project-desc">A lightning-fast, sleek utility tool that instantly encodes links and text into scannable custom QR matrices with clean export options.</p>
+            <p class="project-tech">JavaScript (ES6+) / HTML5 / CSS Canvas</p>
           </div>
         </div>
 
@@ -565,7 +729,7 @@
         <h2 class="contact-heading">Let's Connect.</h2>
         <div class="contact-links">
           <a href="mailto:hayzuwu.io@gmail.com">hayzuwu.io@gmail.com</a>
-          <a href="tel:+919876543210">+91 95933 86260</a>
+          <a href="tel:+919593386260">+91 95933 86260</a>
           <a href="https://github.com/hayzuwu" target="_blank">github.com/hayzuwu</a>
         </div>
       </div>
