@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hayzuwu — Frontend Specialist</title>
   
-  <!-- Premium Typography: Inter -->
+  <!-- Premium Typography: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -121,7 +121,7 @@
     }
 
     .hero-title {
-      font-size: clamp(64px, 10vw, 120px); /* Slightly increased size for the shorter brand name */
+      font-size: clamp(64px, 10vw, 120px);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.05em;
@@ -229,14 +229,77 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      transition: border-color 0.3s var(--ease);
     }
 
-    .visual-placeholder-text {
-      color: #333333;
-      font-size: 14px;
+    .project-visual:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Enhanced Larger Mock Typing Box */
+    .mock-typing-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      line-height: 2rem;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 480px;
+      user-select: none;
+    }
+
+    .mock-line {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .mock-word.correct-typed { color: #10b981; }
+    .mock-word.dim-word { color: #555555; }
+    
+    .mock-caret {
+      width: 2.5px;
+      height: 1.35rem;
+      background-color: #f59e0b;
+      border-radius: 2px;
+      animation: pulseCaret 1.2s infinite;
+    }
+
+    @keyframes pulseCaret {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* Project Action Overlay Button */
+    .project-link-badge {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s var(--ease);
+      text-decoration: none;
+      z-index: 2;
+    }
+
+    .project-visual:hover .project-link-badge {
+      background: var(--text-main);
+      color: var(--bg-color);
+      transform: translateY(-2px);
     }
 
     .project-info {
@@ -305,7 +368,7 @@
       transform: translateY(-2px);
     }
 
-    /* --- Contact Section (Stacked Layout) --- */
+    /* --- Contact Section --- */
     .contact-section {
       border-top: 1px solid var(--border-color);
       padding: 140px 0;
@@ -439,15 +502,29 @@
           </div>
         </div>
 
-        <!-- Project 2: Madtype -->
+        <!-- Project 2: Madtype (Larger & Better Preview Box) -->
         <div class="project-item animate-up delay-2">
-          <div class="project-visual">
-            <span class="visual-placeholder-text">Typing Interface</span>
-          </div>
+          <a href="https://hayzuwu.github.io/MadType/" class="project-visual" target="_blank" title="Launch Madtype">
+            <div class="mock-typing-box">
+              <div class="mock-line">
+                <span class="mock-word correct-typed">the</span>
+                <span class="mock-word correct-typed">night</span>
+                <span class="mock-word correct-typed">was</span>
+                <div class="mock-caret"></div>
+              </div>
+              <div class="mock-line">
+                <span class="mock-word dim-word">quiet as the rain</span>
+              </div>
+              <div class="mock-line">
+                <span class="mock-word dim-word">starts to fall</span>
+              </div>
+            </div>
+            <span class="project-link-badge">Live Preview ↗</span>
+          </a>
           <div class="project-info">
             <h3 class="project-title">Madtype</h3>
-            <p class="project-desc">A minimalist typing speed test and typography playground. Engineered for ultra-low latency input rendering and a distraction-free, fluid user experience.</p>
-            <p class="project-tech">JavaScript (ES6+) / HTML5 / Modern CSS</p>
+            <p class="project-desc">A minimalist typing speed test and typography playground. Engineered for ultra-low latency input rendering and a distraction-free, fluid user experience[cite: 1].</p>
+            <p class="project-tech">JavaScript (ES6+) / HTML5 / Modern CSS[cite: 1]</p>
           </div>
         </div>
 
@@ -488,7 +565,7 @@
         <h2 class="contact-heading">Let's Connect.</h2>
         <div class="contact-links">
           <a href="mailto:hayzuwu.io@gmail.com">hayzuwu.io@gmail.com</a>
-          <a href="tel:+919876543210">+91 98765 43210</a>
+          <a href="tel:+919876543210">+91 95933 86260</a>
           <a href="https://github.com/hayzuwu" target="_blank">github.com/hayzuwu</a>
         </div>
       </div>
