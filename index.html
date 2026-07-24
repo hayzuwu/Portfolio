@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hayzuwu — Frontend Specialist</title>
+  
+  <!-- Premium Typography: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #050505; 
+      --surface-color: #111111;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f5f5;
+      --text-muted: #888888;
+      --accent: #ffffff;
+      
+      --font-stack: 'Inter', sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-up {
+      animation: fadeUp 1s var(--ease) forwards;
+      opacity: 0;
+    }
+    
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    /* --- Layout --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 140px 0;
+    }
+
+    /* --- Navbar --- */
+    nav {
+      padding: 32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s var(--ease);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 60px;
+      padding-top: 80px;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(64px, 10vw, 120px); /* Slightly increased size for the shorter brand name */
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      color: var(--text-main);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 2vw, 22px);
+      color: var(--text-muted);
+      line-height: 1.5;
+      max-width: 500px;
+      font-weight: 400;
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* PERFECT CIRCLE PFP */
+    .pfp-wrapper {
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .pfp-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.05) brightness(0.9);
+      transition: transform 0.7s var(--ease);
+    }
+
+    .pfp-wrapper:hover .pfp-image {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 140px;
+        gap: 40px;
+      }
+      .hero-visual {
+        justify-content: flex-start;
+      }
+      .pfp-wrapper {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+    }
+
+    /* --- Section Typography --- */
+    .section-header {
+      margin-bottom: 80px;
+    }
+    
+    .section-title {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    /* --- Projects --- */
+    .project-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .project-item:nth-child(even) {
+      direction: rtl;
+    }
+    .project-item:nth-child(even) .project-info {
+      direction: ltr;
+    }
+
+    @media (max-width: 900px) {
+      .project-item, .project-item:nth-child(even) {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 32px;
+      }
+    }
+
+    .project-visual {
+      background: var(--surface-color);
+      aspect-ratio: 16/11;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .visual-placeholder-text {
+      color: #333333;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .project-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .project-tech {
+      font-family: monospace;
+      color: #555555;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    /* --- Skills Section --- */
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 60px;
+    }
+
+    .skill-group h3 {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-list li {
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      color: var(--text-main);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .skill-list li:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* --- Contact Section (Stacked Layout) --- */
+    .contact-section {
+      border-top: 1px solid var(--border-color);
+      padding: 140px 0;
+    }
+
+    .contact-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .contact-heading {
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin: 0 0 60px 0;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .contact-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s var(--ease), border-color 0.3s var(--ease), padding-left 0.3s var(--ease);
+    }
+
+    .contact-links a:first-child {
+      border-top: 1px solid var(--border-color);
+    }
+
+    .contact-links a:hover {
+      color: var(--text-main);
+      border-color: var(--text-main);
+      padding-left: 12px;
+    }
+
+    .contact-links a::after {
+      content: '↗';
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 300;
+      font-size: 1.2em;
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: all 0.3s var(--ease);
+    }
+
+    .contact-links a:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .skills-wrapper { grid-template-columns: 1fr; }
+    }
+
+    /* --- Footer --- */
+    footer {
+      padding: 40px 24px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .easter-egg {
+      opacity: 0.05;
+      transition: opacity 0.3s ease;
+    }
+    .easter-egg:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="container animate-up delay-1">
+    <a href="#" class="logo">hayzuwu.</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero container">
+      <div class="hero-text animate-up delay-2">
+        <h1 class="hero-title">hayzuwu.</h1>
+        <p class="hero-subtitle">I'm a frontend specialist focused on writing clean code, designing premium UI layouts, and engineering fluid web experiences.</p>
+      </div>
+      
+      <div class="hero-visual animate-up delay-3">
+        <div class="pfp-wrapper">
+          <img src="profile picture.png" alt="hayzuwu profile" class="pfp-image">
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="work" class="container">
+      <div class="section-header animate-up delay-1">
+        <h2 class="section-title">Selected Work</h2>
+      </div>
+
+      <div class="project-grid">
+        
+        <!-- Project 1 -->
+        <div class="project-item animate-up delay-2">
+          <div class="project-visual">
+            <span class="visual-placeholder-text">Music Player UI</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Custom Music Player</h3>
+            <p class="project-desc">A custom-built vanilla Spotify clone bridging aesthetics and performance. Features fluid playlist navigation and a minimalist frosted-glass UI.</p>
+            <p class="project-tech">HTML5 / CSS / JavaScript / Web Audio API</p>
+          </div>
+        </div>
+
+        <!-- Project 2: Madtype -->
+        <div class="project-item animate-up delay-2">
+          <div class="project-visual">
+            <span class="visual-placeholder-text">Typing Interface</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Madtype</h3>
+            <p class="project-desc">A minimalist typing speed test and typography playground. Engineered for ultra-low latency input rendering and a distraction-free, fluid user experience.</p>
+            <p class="project-tech">JavaScript (ES6+) / HTML5 / Modern CSS</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="container animate-up delay-1">
+      <div class="section-header">
+        <h2 class="section-title">Expertise</h2>
+      </div>
+      
+      <div class="skills-wrapper">
+        <div class="skill-group">
+          <h3>Frontend Architecture</h3>
+          <ul class="skill-list">
+            <li>HTML5 & Modern CSS</li>
+            <li>JavaScript (ES6+)</li>
+            <li>React JS</li>
+            <li>Responsive UI/UX</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Foundational Systems</h3>
+          <ul class="skill-list">
+            <li>REST API Integration</li>
+            <li>Python Basics</li>
+            <li>Node.js Basics</li>
+            <li>Git / GitHub</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section">
+      <div class="container contact-wrapper animate-up delay-1">
+        <h2 class="contact-heading">Let's Connect.</h2>
+        <div class="contact-links">
+          <a href="mailto:hayzuwu.io@gmail.com">hayzuwu.io@gmail.com</a>
+          <a href="tel:+919876543210">+91 98765 43210</a>
+          <a href="https://github.com/hayzuwu" target="_blank">github.com/hayzuwu</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>&copy; 2026 hayzuwu. <span class="easter-egg">i love you alina too</span></div>
+    <div>Hosted on GitHub</div>
+  </footer>
+
+</body>
+</html>
